@@ -55,6 +55,16 @@ foo
 kubectl config use-conext docker-desktop
 ```
 
+- Remove context, cluster and users from kubectl config.
+```
+kubectl config unset users.abc
+
+kubectl config unset contexts.abc
+
+kubectl config unset clusters.abc
+```
+
+
 - Set default namesapce
 ```
 kubectl config set-context $(kubectl config current-context) --namespace=my-namespace

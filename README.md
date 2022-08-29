@@ -326,3 +326,30 @@ Get updates
 ```
 az aks get-upgrades --resource-group <Resource Group Name> --name <AKS Name>
 ```
+
+## Pods details
+
+ k get pods -o wide -n <ABC>
+ 
+ K get pods -n <ABC> --sort-by=.metadata.creationTimestamp
+ 
+ k get pods -A -o wide |grep aks-highcpu | grep -i running
+ 
+ k get pods -A -o wide |grep aks-highcpu | grep -v -i running -->(pods with status not running)
+ 
+ k get pods -A | grep -v -i running --> to know all pods in running state in all nodes
+ 
+ 
+ ## Delete clean up of old nodes 
+ 
+ k get all -n <ABC> ---> gives all resources (deployments,services, statefullsets ..etc) present in the namespace ABC  
+ 
+ k get nodes ---> gives all nodes present in the cluster 
+ 
+ k cordon <nodename> ---> will stop the schedueling new pods
+ 
+ k drain <nodename> --delete-local-data -ignore-daemonsets --delete-emptydir-data --> will terminate pods (schedule them on other nodes in parallel ) on it & finally delete node
+ 
+ K delete pod <PODNAME> --grace-period=0 --force --namespace <namespace> --> will delete any pods with long grace-period.
+ 
+ K get nodes --sort-by=.metadata.name --> will show a new node schedueling
